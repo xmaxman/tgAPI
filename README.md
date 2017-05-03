@@ -45,7 +45,7 @@ nano api.bot
   
   line 162 = 
   
-						if q.from.id == CliBotId or q.from.id == SudoId then
+						if q.from.id == #CliBotId or q.from.id == #SudoId then
   
   
  
