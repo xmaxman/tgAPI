@@ -1,5 +1,16 @@
 # tgInline
 
+first goto botfather and create a robot
+
+trun on inline
+
+change fedback mod too 100%
+
+revoke token
+
+open ubuntu server
+tested on ubuntu 16
+
 ```
 cd $home && git clone https://github.com/sajjad-021/tgAPI.git && cd tgAPI && chmod 700 launch.sh && ./launch.sh
 ```
