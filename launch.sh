@@ -83,65 +83,7 @@ echo -e "\e[38;5;142mInstalling LuaRocks\e"
         sudo luarocks install $rock
     done
 		
-  cd ..
-	
-}
-
-rk() {
-  ./.luarocks/bin/luarocks install luasec
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install lbase64 20120807-3
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install luafilesystem
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install lub
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install luaexpat
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install redis-lua
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install lua-cjson
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install fakeredis
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install xml
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install feedparser
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  ./.luarocks/bin/luarocks install serpent
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
+  cd ..	
 }
 
 py() {
@@ -158,8 +100,6 @@ clear
 tg
 clear
 lu
-clear
-rk
 clear
 py
 clear
