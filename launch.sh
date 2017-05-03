@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
-cd $HOME/tgInline
+cd $HOME/tgAPI
 aa() {
  sudo apt-get install
 }
-function logo() {
+
+logo() {
     declare -A logo
     seconds="0.004"
-logo[-1]=" ::::::::::  :::::::      ::     ::  ::::::::  ::     ::  ::::::  :::::::: :::::: "
-logo[0]="     +:     :+    :+:    :+:+   +::+ +:       :+:+   +:+: +:   :+ +:       +:   :+ "
-logo[1]="     :+     +:           :+ +:+:+ :+ :+       :+ +:+:+ :+ :+   +: :+       :+   +: "
-logo[2]="     ++     :#           ++  +:+  ++ +++++#   ++  +:+  ++ #+++++  +++:+#   +++++#  "
-logo[3]="     ++     +#  +#+#+    #+   +   #+ #+       #+   +   +# #+   +# #+       #+   +# "
-logo[4]="     +#     #+     +#    +#       +# +#       +#       #+ +#    # +#       +#    #+"
-logo[5]="     ##      #######     ##       ## ######## ##       ## ####### ######## ##    ##"
-    printf "\033[38;5;208m\t"
+logo[-1]="  _//             _//       _//_////////_//       _//_// _//   _////////_///////   "
+logo[0]="  _//             _/ _//   _///_//      _/ _//   _///_/    _// _//      _//    _//  "
+logo[1]="_/_/ _/   _//     _// _// _ _//_//      _// _// _ _//_/     _//_//      _//    _//  "
+logo[2]="  _//   _//  _//  _//  _//  _//_//////  _//  _//  _//_/// _/   _//////  _/ _//      "
+logo[3]="  _//  _//   _//  _//   _/  _//_//      _//   _/  _//_/     _//_//      _//  _//    "
+logo[4]="  _//   _//  _//  _//       _//_//      _//       _//_/      _/_//      _//    _//  "
+logo[5]="   _//      _//   _//       _//_////////_//       _//_//// _// _////////_//      _//"
+logo[6]="         _//                                                                        "     
+    printf "\e[38;5;213m\t"
     for i in ${!logo[@]}; do
         for x in `seq 0 ${#logo[$i]}`; do
             printf "${logo[$i]:$x:1}"
@@ -23,75 +25,148 @@ logo[5]="     ##      #######     ##       ## ######## ##       ## ####### #####
     done
 printf "\n"
 }
-function tg() {
- echo -e "\e[1;36mremove old telegram-cli\e[208m"
+
+tg() {
+ echo -e "\e[38;5;105mremove old telegram-cli\e"
     rm -rf ../.telegram-cli
     
- echo -e "\e[1;36minstall telegram-cli\e[0m"
-    cd bot
+ echo -e "\e[38;5;099minstall telegram-cli\e"
+    cd api
+    chmod +x api.sh
+    cd ../bot
     wget https://valtman.name/files/telegram-cli-1222
     mv telegram-cli-1222 telegram-cli
-    cd ..
+    chmod +x bot.sh
+    chmod +x telegram-cli
+		cd ..
  }
- function is() {
- echo -e "\e[2;37mUpdating packages\e[400m"
+
+is() {
+ echo -e "\e[38;5;035mUpdating packages\e"
     sudo apt-get update -y
  
- echo -e "\e[1;35mUpgrade packages\e[600m"
+ echo -e "\\e[38;5;036mUpgrade packages\e"
     sudo apt-get upgrade -y
  
- echo -e "\e[1;32mInstalling dependencies\e[208m"
+ echo -e "\\e[38;5;129mInstalling dependencies\e"
     sudo apt-get install libreadline-dev libconfig-dev libssl-dev lua5.2 liblua5.2-dev lua-socket lua-sec lua-expat libevent-dev make unzip git redis-server autoconf g++ libjansson-dev libpython-dev expat libexpat1-dev -y
  
- echo -e "\e[2;36mInstalling more dependencies\e[408m"
+ echo -e "\e[38;5;034mInstalling more dependencies\e"
     sudo apt-get install lua-lgi -y
     sudo apt-get install software-properties-common -y
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     sudo apt-get install libstdc++6 -y
 }
-function lu() {
-echo -e "\e[1;30mInstalling LuaRocks from sources\e[606m"
-    wget http://luarocks.org/releases/luarocks-2.2.2.tar.gz
-    tar zxpf luarocks-2.4.2.tar.gz
-    rm -rf luarocks-2.4.2.tar.gz
-    cd luarocks-2.4.2
-    ./configure; sudo make bootstrap
-    make build
-    sudo make install
-    ./configure --lua-version=5.2
-    make build
-    sudo make install
+
+lu() {
+echo -e "\e[38;5;142mInstalling LuaRocks\e"
+  git clone https://github.com/keplerproject/luarocks.git
+  cd luarocks
+  git checkout tags/v2.3.0-rc2 # Release Candidate
+
+  PREFIX="$THIS_DIR/.luarocks"
+
+  ./configure --prefix=$PREFIX --sysconfdir=$PREFIX/luarocks --force-config
+
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  make build && make install
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting.";exit $RET;
+  fi
+
     rocks="luasocket luasec redis-lua lua-term serpent dkjson Lua-cURL multipart-post lanes"
     for rock in $rocks; do
         sudo luarocks install $rock
     done
-    cd ..
+		
+  cd ..
+	
 }
-function ch() {
- chmod +x ./bot/telegram-cli
- chmod +x ./api/api.sh
- chmod +x ./bot/bot.sh
+
+rk() {
+  ./.luarocks/bin/luarocks install luasec
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install lbase64 20120807-3
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install luafilesystem
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install lub
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install luaexpat
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install redis-lua
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install lua-cjson
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install fakeredis
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install xml
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install feedparser
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
+
+  ./.luarocks/bin/luarocks install serpent
+  RET=$?; if [ $RET -ne 0 ];
+    then echo "Error. Exiting."; exit $RET;
+  fi
 }
-function py() {
+
+py() {
  sudo apt-get install python-setuptools python-dev build-essential -y 
  sudo easy_install pip -y
  sudo pip install redis -y
 }
+
 install() {
 logo
 clear
-tg
-clear
 is
+clear
+tg
 clear
 lu
 clear
+rk
+clear
 py
 clear
-ch
-clear
 logo
+echo -e "\e[38;5;046mInstalling packages successfully\e[39m"
 }
+
+
 if [ ! -f ./bot/telegram-cli ]; then
     echo -e "\033[38;5;208mError! telegram-cli not found, Please reply to this message:\033[1;208m"
     read -p "Do you want to install and config? [y/n] = "
@@ -100,10 +175,4 @@ if [ ! -f ./bot/telegram-cli ]; then
     elif [ "$REPLY" == "n" ] || [ "$REPLY" == "N" ]; then
         exit 1
   fi
-fi
-if [[ $1 == "api" ]]; then
-   lua ./api/api.lua
-fi
-sudo service redis-server start
-   ./bot/telegram-cli -s ./bot/bot.lua
 fi
