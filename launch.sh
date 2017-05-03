@@ -38,7 +38,7 @@ tg() {
     mv telegram-cli-1222 telegram-cli
     chmod +x bot.sh
     chmod +x telegram-cli
-		cd ..
+    cd ..
  }
 
 is() {
@@ -56,6 +56,7 @@ is() {
     sudo apt-get install software-properties-common -y
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     sudo apt-get install libstdc++6 -y
+		sudo apt-get install luarocks -y
 }
 
 lu() {
@@ -64,7 +65,7 @@ echo -e "\e[38;5;142mInstalling LuaRocks\e"
   cd luarocks
   git checkout tags/v2.3.0-rc2 # Release Candidate
 
-  PREFIX="$THIS_DIR/.luarocks"
+  PREFIX="$tgAPI/.luarocks"
 
   ./configure --prefix=$PREFIX --sysconfdir=$PREFIX/luarocks --force-config
 
