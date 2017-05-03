@@ -1,12 +1,12 @@
-bot = dofile('~/data/utils.lua')
-json = dofile('~/data/JSON.lua')
+bot = dofile('../data/utils.lua')
+json = dofile('../data/JSON.lua')
 URL = require "socket.url"
 serpent = require("serpent")
 http = require "socket.http"
 https = require "ssl.https"
 redis = require('redis')
 db = redis.connect('127.0.0.1', 6379)
-BASE = '~/tgAPI/bot/'
+BASE = '../bot/'
 SUDO = 158955285 --sudo id
 sudo_users = {158955285,180191663,279700027,361871436,userid}
 BOTS = 361871436 --bot id
