@@ -64,7 +64,7 @@ edit and replace
 
  ```bash
 cd ../bot
-screen bot.sh
+screen ./bot.sh
      # Will ask you for a phone number & confirmation code.
 ```
 
