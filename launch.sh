@@ -63,27 +63,22 @@ lu() {
 echo -e "\e[38;5;142mInstalling LuaRocks\e"
   git clone https://github.com/keplerproject/luarocks.git
   cd luarocks
-  git checkout tags/v2.3.0-rc2 # Release Candidate
+  git checkout tags/v2.4.2 # Current stable
 
-  PREFIX="$tgAPI/.luarocks"
+  PREFIX="$THIS_DIR/.luarocks"
 
   ./configure --prefix=$PREFIX --sysconfdir=$PREFIX/luarocks --force-config
+   make build && make install
+cd ..
+  rm -rf luarocks
+}
 
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting."; exit $RET;
-  fi
-
-  make build && make install
-  RET=$?; if [ $RET -ne 0 ];
-    then echo "Error. Exiting.";exit $RET;
-  fi
-
-    rocks="luasocket luasec serpent redis-lua lua-term serpent dkjson Lua-cURL multipart-post lanes"
+lus() {
+echo -e "\e[38;5;105mInstall rocks service\e"
+rocks="luasocket luasec redis-lua lua-term serpent dkjson Lua-cURL multipart-post lanes xml fakeredis luaexpat luasec lbase64 luafilesystem lub lua-cjson feedparser serpent"
     for rock in $rocks; do
-        sudo luarocks install $rock
+      ./.luarocks/bin/luarocks install $rock
     done
-		
-  cd ..	
 }
 
 py() {
@@ -101,6 +96,7 @@ tg
 clear
 lu
 clear
+lus
 py
 clear
 logo
