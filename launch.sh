@@ -78,7 +78,7 @@ echo -e "\e[38;5;142mInstalling LuaRocks\e"
     then echo "Error. Exiting.";exit $RET;
   fi
 
-    rocks="luasocket luasec redis-lua lua-term serpent dkjson Lua-cURL multipart-post lanes"
+    rocks="luasocket luasec serpent redis-lua lua-term serpent dkjson Lua-cURL multipart-post lanes"
     for rock in $rocks; do
         sudo luarocks install $rock
     done
