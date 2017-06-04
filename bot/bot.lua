@@ -1,15 +1,18 @@
-bot = dofile('../data/utils.lua')
-json = dofile('../data/JSON.lua')
+package.path = package.path..';.luarocks/share/lua/5.2/?.lua;.luarocks/share/lua/5.2/?/init.lua'
+package.cpath = package.cpath..';.luarocks/lib/lua/5.2/?.so'
+
+bot = dofile('utils.lua')
+json = dofile('JSON.lua')
 URL = require "socket.url"
 serpent = require("serpent")
 http = require "socket.http"
 https = require "ssl.https"
 redis = require('redis')
+SUDO = 000000000   --[[Enter your id here]]
 db = redis.connect('127.0.0.1', 6379)
-BASE = '../bot/'
-SUDO = 158955285 --sudo id
-sudo_users = {158955285,180191663,279700027,361871436,userid}
-BOTS = 361871436 --bot id
+BASE = '../tgAPI/'
+BOTS = 000000000 --[[Enter your cli bot id here]]
+sudo_users = {000000000,000000000,userid}  --[[Enter your id and cli bot id here]]
 bot_id = db:get(SUDO..'bot_id')
 function vardump(value)
   print(serpent.block(value, {comment=false}))
@@ -39,7 +42,7 @@ end
 end
 ------------------------------------------------------------
 function is_bot(msg)
-  if tonumber(BOTS) == 361871436 then
+  if tonumber(BOTS) == 000000000 then  --[[Enter your cli bot id here]]
     return true
     else
     return false
@@ -875,7 +878,7 @@ end
             end
           tdcli_function({
       ID = "GetInlineQueryResults",
-      bot_user_id_ = 335663307,
+      bot_user_id_ = 347831625,
       chat_id_ = msg.chat_id_,
       user_location_ = {
         ID = "Location",
