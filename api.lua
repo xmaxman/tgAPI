@@ -1,16 +1,19 @@
+package.path = package.path..';.luarocks/share/lua/5.2/?.lua;.luarocks/share/lua/5.2/?/init.lua'
+package.cpath = package.cpath..';.luarocks/lib/lua/5.2/?.so'
+
 local URL = require "socket.url"
 local https = require "ssl.https"
 local serpent = require "serpent"
-local json = (loadfile "../data/JSON.lua")()
-local token = '335663307:AAG57Tpfw1zbR5j0eSgC9Uw4LVPkq9p9UVU' --token
+local json = (loadfile "JSON.lua")()
+local token = '347831625:AAGFm2JtmJ5Z0FTkkDQJDSsr7pd2XM1xXF4'
 local url = 'https://api.telegram.org/bot' .. token
 local offset = 0
+local SUDO = 000000000   --[[Enter your id here]]
 local redis = require('redis')
 local redis = redis.connect('127.0.0.1', 6379)
-local SUDO = 158955285
 function is_mod(chat,user)
-sudo = {158955285,180191663,279700027,361871436}
-  local var = false
+	sudo = {000000000,000000000}  --[[Enter your id and cli bot id here]]
+ local var = false
   for v,_user in pairs(sudo) do
     if _user == user then
       var = true
@@ -159,7 +162,8 @@ local function run()
           offset = msg.update_id + 1
           if msg.inline_query then
             local q = msg.inline_query
-						if q.from.id == 361871436 or q.from.id == 158955285 then
+		if q.from.id == 00000000 or q.from.id == 00000000 then
+		--[[Enter       cli bot id       and       your id   ]]
             if q.query:match('%d+') then
               local chat = '-'..q.query:match('%d+')
 							local function is_lock(chat,value)
