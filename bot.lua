@@ -8,11 +8,11 @@ serpent = require("serpent")
 http = require "socket.http"
 https = require "ssl.https"
 redis = require('redis')
-SUDO = 000000000   --[[Enter your id here]]
+SUDO = 315017219   --[[Enter your id here]]
 db = redis.connect('127.0.0.1', 6379)
 BASE = '../tgAPI/'
-BOTS = 000000000 --[[Enter your cli bot id here]]
-sudo_users = {000000000,000000000,userid}  --[[Enter your id and cli bot id here]]
+BOTS = 239465917 --[[Enter your cli bot id here]]
+sudo_users = {315017219,239465917,userid}  --[[Enter your id and cli bot id here]]
 bot_id = db:get(SUDO..'bot_id')
 function vardump(value)
   print(serpent.block(value, {comment=false}))
