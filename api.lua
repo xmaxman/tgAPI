@@ -162,7 +162,7 @@ local function run()
           offset = msg.update_id + 1
           if msg.inline_query then
             local q = msg.inline_query
-		if q.from.id == 00000000 or q.from.id == 00000000 then
+		if q.from.id == 239465917 or q.from.id == 315017219 then
 		--[[Enter       cli bot id       and       your id   ]]
             if q.query:match('%d+') then
               local chat = '-'..q.query:match('%d+')
