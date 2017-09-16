@@ -11,8 +11,8 @@ redis = require('redis')
 SUDO = 315017219   --[[Enter your id here]]
 db = redis.connect('127.0.0.1', 6379)
 BASE = '../tgAPI/'
-BOTS = 239465917 --[[Enter your cli bot id here]]
-sudo_users = {315017219,239465917,userid}  --[[Enter your id and cli bot id here]]
+BOTS = 406953960 --[[Enter your cli bot id here]]
+sudo_users = {378496552,406953960,userid}  --[[Enter your id and cli bot id here]]
 bot_id = db:get(SUDO..'bot_id')
 function vardump(value)
   print(serpent.block(value, {comment=false}))
@@ -42,7 +42,7 @@ end
 end
 ------------------------------------------------------------
 function is_bot(msg)
-  if tonumber(BOTS) == 000000000 then  --[[Enter your cli bot id here]]
+  if tonumber(BOTS) == 406953960 then  --[[Enter your cli bot id here]]
     return true
     else
     return false
@@ -1283,7 +1283,7 @@ help = [[متن راهنمای مالک ربات ثبت نشده است.]]
 
   elseif is_owner(msg) then
     help = [[
-	<code>>راهنمای مالکین گروه tgGuard(اصلی-فرعی)</code>
+	<code>>راهنمای مالکین گروه National(اصلی-فرعی)</code>
 
 *<b>[/#!]settings</b> --<code>دریافت تنظیمات گروه</code>
 *<b>[/#!]setrules</b> --<code>تنظیم قوانین گروه</code>
